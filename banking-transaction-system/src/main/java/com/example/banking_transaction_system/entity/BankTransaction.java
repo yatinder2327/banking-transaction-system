@@ -22,13 +22,13 @@ import jakarta.persistence.Table;
 @Table (name = "transactions")
 public class BankTransaction {
     public Long getId() {
-        return Id;
+        return id;
     }
     public String getTransactionId() {
         return transactionId;
     }
     public TransactionType getType() {
-        return Type;
+        return type;
     }
     public BigDecimal getAmount() {
         return amount;
@@ -47,12 +47,12 @@ public class BankTransaction {
     }
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     @Column (name = "transaction_id", nullable = false, unique = true, length = 64)
     private String transactionId;
     @Enumerated(EnumType.STRING)
     @Column( nullable = false,length = 20)
-    private TransactionType Type;
+    private TransactionType type;
     @Column (nullable = false, precision = 19, scale = 2)
     private BigDecimal amount;
     @ManyToOne(fetch = FetchType.LAZY) 
@@ -76,13 +76,13 @@ public class BankTransaction {
         
     }
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
     public void setType(TransactionType type) {
-        Type = type;
+        this.type = type;
     }
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
