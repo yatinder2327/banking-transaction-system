@@ -8,8 +8,6 @@ public record CustomerResponse(
     String name,
     String email,
     String phone,
-    LocalDateTime CreatedAt
+    LocalDateTime createdAt
 )
-{
-    
-}
+{}

@@ -8,7 +8,7 @@ import com.example.banking_transaction_system.entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
     boolean existsByAccountNumber(String accountNumber);
-    List<Account> findByCustomerId(Long customerId);
+    List<Account> findByCustomer_CustomerId(Long customerId);
 
     
 }

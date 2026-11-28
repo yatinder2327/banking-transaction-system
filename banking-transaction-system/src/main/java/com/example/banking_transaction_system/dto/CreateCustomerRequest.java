@@ -15,8 +15,7 @@ public record CreateCustomerRequest(
     String email,
     @NotBlank(message = "Phone number is required")
     @Pattern(
-        regexp = "^[0-9]{10,15}$", message = "Phone must contain 10 and 15 digits"
-
+        regexp = "^[0-9]{10,15}$", message = "Phone must contain 10 to 15 digits"
     )
     String phone
 ) {}

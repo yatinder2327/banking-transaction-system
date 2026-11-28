@@ -1,10 +1,12 @@
 package com.example.banking_transaction_system.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.banking_transaction_system.dto.AccountResponse;
@@ -14,8 +16,6 @@ import com.example.banking_transaction_system.entity.Customer;
 import com.example.banking_transaction_system.enums.AccountStatus;
 import com.example.banking_transaction_system.repository.AccountRepository;
 import com.example.banking_transaction_system.repository.CustomerRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service 
 public class AccountService {
@@ -54,8 +54,22 @@ public class AccountService {
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
             return mapToResponse(account);
     }
-    
+
     @Transactional (readOnly = true)
+    public List<AccountResponse> getAllAccounts() {
+        return accountRepository.findAll().stream().map(this::mapToResponse).toList();
+    }
+
+    public AccountResponse mapToResponse(Account account) {
+        return new AccountResponse(
+            account.getAccountId(),
+            account.getCustomer().getCustomerId(),
+            account.getAccountNumber(),
+            account.getBalance(),
+            account.getStatus(),
+            account.getCreatedAt()
+        );
+    }
     
   
 }
